@@ -1,10 +1,10 @@
 import BaseLayout from "containers/BaseLayout"
-import Navbar from "components/Navbar"
+// import Navbar from "components/Navbar"
 import Dashboard from "components/Dashboard"
 import "./App.css"
 
 function App() {
-  return <BaseLayout navbar={<Navbar />} main={<Dashboard />} />
+  return <BaseLayout main={<Dashboard />} />
 }
 
 export default App
