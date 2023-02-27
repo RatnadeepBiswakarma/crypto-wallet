@@ -9,10 +9,20 @@ export default function Dashboard() {
   const [balance, setBalance] = useState(5000)
   const [btnText, setBtnText] = useState("Purchase")
   const [selectedUnits, setSelectedUnits] = useState({})
+  const [shouldAutoUpdate, setShouldAutoUpdate] = useState(false)
+  const [timerId, setTimerId] = useState(null)
 
   useEffect(() => {
     populateData()
   }, [])
+
+  useEffect(() => {
+    if (shouldAutoUpdate) {
+      autoUpdateData()
+    } else {
+      clearTimeout(timerId)
+    }
+  }, [shouldAutoUpdate])
 
   const cartValue = useMemo(() => {
     let val = 0
@@ -72,6 +82,22 @@ export default function Dashboard() {
     setSelectedUnits({})
   }
 
+  function handleAutoUpdateChange(evt) {
+    setShouldAutoUpdate(evt.target.checked)
+  }
+
+  function autoUpdateData() {
+    clearTimeout(timerId)
+
+    if (shouldAutoUpdate) {
+      populateData()
+      const id = setTimeout(() => {
+        autoUpdateData()
+      }, 5000)
+      setTimerId(id)
+    }
+  }
+
   return (
     <div>
       <div className='p-2 sm:p-4 md:p-8'>
@@ -95,15 +121,30 @@ export default function Dashboard() {
           </button>
         </Toolbar>
         <div className='border border-gray-700 rounded p-2 mt-4 text-right flex items-end flex-col'>
-          <button
-            onClick={populateData}
-            className='bg-slate-700 flex justify-center items-center px-2 rounded mb-2'
-          >
-            <img
-              src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
-              className={`${isLoading && "rotate-icon"} py-1`}
-            />
+          <div className='flex justify-center items-center mb-2'>
+            <label
+              htmlFor='auto-update'
+              className='flex justify-center items-center mr-4'
+            >
+              <input
+                type='checkbox'
+                id='auto-update'
+                value={shouldAutoUpdate}
+                onChange={handleAutoUpdateChange}
+                className='mr-2'
+              />
+              Auto Update
+            </label>
+            <button
+              onClick={populateData}
+              className='bg-slate-700 flex justify-center items-center px-2 rounded'
+            >
+              <img
+                src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
+                className={`${isLoading && "rotate-icon"} py-1`}
+              />
             </button>
+          </div>
           <Table items={getItems} handleUnitsInput={handleUnitsInput} />
         </div>
       </div>
