@@ -1,8 +1,5 @@
 import "./Table.css"
-
-function formatPrice(price) {
-  return price.toFixed(3)
-}
+import { formatPrice } from "utils"
 
 export default function Table({ items, head, body, handleUnitsInput }) {
   return (
