@@ -48,6 +48,16 @@ export default function Dashboard() {
     })
   }, [selectedUnits, items])
 
+  const getHistory = useMemo(() => {
+    return purchaseHistory.map(item => {
+      const dataSource = items.find(i => i.id === item.id) || item
+      return {
+        ...item,
+        current_price: dataSource.metrics.market_data.price_usd
+      }
+    })
+  })
+
   function populateData() {
     setIsLoading(true)
     fetchData()
@@ -114,7 +124,7 @@ export default function Dashboard() {
       populateData()
       const id = setTimeout(() => {
         autoUpdateData()
-      }, 5000)
+      }, 3000)
       setTimerId(id)
     }
   }
@@ -176,8 +186,8 @@ export default function Dashboard() {
             <h2 className="text-center font-bold">Purchase History</h2>
             <CardWrapper className='mt-4'>
               {
-                purchaseHistory.length > 0 ?
-                <HistoryList items={purchaseHistory} /> :
+                getHistory.length > 0 ?
+                <HistoryList items={getHistory} /> :
                 <div className="text-sm text-center py-4">Purchase history will be displayed here</div>
               }
             </CardWrapper>
