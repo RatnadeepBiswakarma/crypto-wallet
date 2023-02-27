@@ -8,7 +8,7 @@ import HistoryList from "./History/HistoryList"
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
-  const [balance, setBalance] = useState(5000)
+  const [balance, setBalance] = useState(500000)
   const [btnText, setBtnText] = useState("Purchase")
   const [selectedUnits, setSelectedUnits] = useState({})
   const [shouldAutoUpdate, setShouldAutoUpdate] = useState(false)
@@ -152,7 +152,7 @@ export default function Dashboard() {
           </button>
         </Toolbar>
         <div className='flex justify-between items-start border-t mt-4 pt-4 border-gray-700'>
-          <div className='w-2/3'>
+          <div className='w-3/5'>
             <h2 className="text-center font-bold">Stocks</h2>
             <CardWrapper className='mt-4 mr-2 text-right flex items-end flex-col'>
               <div className='flex justify-center items-center mb-2'>
@@ -182,7 +182,7 @@ export default function Dashboard() {
               <Table items={getItems} handleUnitsInput={handleUnitsInput} />
             </CardWrapper>
           </div>
-          <div className='w-1/3'>
+          <div className='w-2/5'>
             <h2 className="text-center font-bold">Purchase History</h2>
             <CardWrapper className='mt-4'>
               {
