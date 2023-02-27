@@ -39,7 +39,9 @@ export default function Dashboard() {
   }, [items, selectedUnits])
 
   const purchaseAllowed = useMemo(() => {
-    return parseFloat(cartValue) > 0 && parseFloat(cartValue) <= parseFloat(balance)
+    return (
+      parseFloat(cartValue) > 0 && parseFloat(cartValue) <= parseFloat(balance)
+    )
   }, [cartValue, balance])
 
   const getItems = useMemo(() => {
@@ -53,7 +55,7 @@ export default function Dashboard() {
       const dataSource = items.find(i => i.id === item.id) || item
       return {
         ...item,
-        current_price: dataSource.metrics.market_data.price_usd
+        current_price: dataSource.metrics.market_data.price_usd,
       }
     })
   })
@@ -131,65 +133,74 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className='p-2 sm:p-4 md:p-8'>
-        <Toolbar className='flex justify-end'>
-          <div className='font-medium text-lg mr-4'>
-            Balance: <span className='text-green-500'>${balance}</span>
+      <div className='p-2 sm:p-4 md:p-4'>
+        <Toolbar className='flex justify-between items-center'>
+          <h1 className='text-center text-xl text-white'>Crypto Wallet App</h1>
+          <div className='flex'>
+            <div className='font-medium text-lg mr-4'>
+              Balance: <span className='text-green-500'>${balance}</span>
+            </div>
           </div>
-          <div className='font-medium text-lg'>
-            Cart: <span className='text-green-500'>${cartValue}</span>
-          </div>
-          <button
-            onClick={purchase}
-            disabled={!purchaseAllowed}
-            className={`px-4 py-1 rounded-sm ml-4 border ${
-              purchaseAllowed
-                ? "text-blue-400 border-blue-400"
-                : "text-gray-500 border-gray-600"
-            }`}
-          >
-            {btnText}
-          </button>
         </Toolbar>
         <div className='flex justify-between items-start border-t mt-4 pt-4 border-gray-700'>
           <div className='w-3/5'>
-            <h2 className="text-center font-bold">Stocks</h2>
-            <CardWrapper className='mt-4 mr-2 text-right flex items-end flex-col'>
-              <div className='flex justify-center items-center mb-2'>
-                <label
-                  htmlFor='auto-update'
-                  className='flex justify-center items-center mr-4'
-                >
-                  <input
-                    type='checkbox'
-                    id='auto-update'
-                    value={shouldAutoUpdate}
-                    onChange={handleAutoUpdateChange}
-                    className='mr-2'
-                  />
-                  Auto Update
-                </label>
-                <button
-                  onClick={populateData}
-                  className='bg-slate-700 flex justify-center items-center px-2 rounded'
-                >
-                  <img
-                    src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
-                    className={`${isLoading && "rotate-icon"} py-1`}
-                  />
-                </button>
+            <h2 className='text-center font-bold'>Stocks</h2>
+            <CardWrapper className='mt-4 mr-2'>
+              <div className='flex items-center justify-between'>
+                <div className='flex justify-center items-center mb-2'>
+                  <label
+                    htmlFor='auto-update'
+                    className='flex justify-center items-center mr-4'
+                  >
+                    <input
+                      type='checkbox'
+                      id='auto-update'
+                      value={shouldAutoUpdate}
+                      onChange={handleAutoUpdateChange}
+                      className='mr-2'
+                    />
+                    Auto Update
+                  </label>
+                  <button
+                    onClick={populateData}
+                    className='bg-slate-700 flex justify-center items-center px-2 rounded'
+                  >
+                    <img
+                      src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
+                      className={`${isLoading && "rotate-icon"} py-1`}
+                    />
+                  </button>
+                </div>
+                <div className='flex items-center'>
+                  <div className='font-medium text-lg'>
+                    Cart: <span className='text-green-500'>${cartValue}</span>
+                  </div>
+                  <button
+                    onClick={purchase}
+                    disabled={!purchaseAllowed}
+                    className={`px-4 py-1 rounded-sm ml-4 border ${
+                      purchaseAllowed
+                        ? "text-blue-400 border-blue-400"
+                        : "text-gray-500 border-gray-600"
+                    }`}
+                  >
+                    {btnText}
+                  </button>
+                </div>
               </div>
               <Table items={getItems} handleUnitsInput={handleUnitsInput} />
             </CardWrapper>
           </div>
           <div className='w-2/5'>
-            <h2 className="text-center font-bold">Purchase History</h2>
+            <h2 className='text-center font-bold'>Purchase History</h2>
             <CardWrapper className='mt-4'>
-              {
-                getHistory.length > 0 ?
-                <HistoryList items={getHistory} /> :
-                <div className="text-sm text-center py-4">Purchase history will be displayed here</div>
-              }
+              {getHistory.length > 0 ? (
+                <HistoryList items={getHistory} />
+              ) : (
+                <div className='text-sm text-center py-4'>
+                  Purchase history will be displayed here
+                </div>
+              )}
             </CardWrapper>
           </div>
         </div>
