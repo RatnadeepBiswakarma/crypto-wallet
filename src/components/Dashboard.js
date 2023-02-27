@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react"
 import { fetchData } from "apis"
 import Toolbar from "components/Toolbar"
 import Table from "./Table"
+import CardWrapper from "containers/CardWrapper"
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false)
@@ -120,7 +121,7 @@ export default function Dashboard() {
             {btnText}
           </button>
         </Toolbar>
-        <div className='border border-gray-700 rounded p-2 mt-4 text-right flex items-end flex-col'>
+        <CardWrapper className='mt-4 text-right flex items-end flex-col'>
           <div className='flex justify-center items-center mb-2'>
             <label
               htmlFor='auto-update'
@@ -146,7 +147,7 @@ export default function Dashboard() {
             </button>
           </div>
           <Table items={getItems} handleUnitsInput={handleUnitsInput} />
-        </div>
+        </CardWrapper>
       </div>
     </div>
   )
