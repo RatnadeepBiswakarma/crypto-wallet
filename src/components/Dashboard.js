@@ -39,7 +39,7 @@ export default function Dashboard() {
   }, [items, selectedUnits])
 
   const purchaseAllowed = useMemo(() => {
-    return cartValue > 0 && cartValue <= balance
+    return parseFloat(cartValue) > 0 && parseFloat(cartValue) <= parseFloat(balance)
   }, [cartValue, balance])
 
   const getItems = useMemo(() => {
