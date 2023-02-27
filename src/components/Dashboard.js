@@ -3,6 +3,7 @@ import { fetchData } from "apis"
 import Toolbar from "components/Toolbar"
 import Table from "./Table"
 import CardWrapper from "containers/CardWrapper"
+import HistoryList from "./History/HistoryList"
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false)
@@ -12,6 +13,7 @@ export default function Dashboard() {
   const [selectedUnits, setSelectedUnits] = useState({})
   const [shouldAutoUpdate, setShouldAutoUpdate] = useState(false)
   const [timerId, setTimerId] = useState(null)
+  const [purchaseHistory, setPurchaseHistory] = useState([])
 
   useEffect(() => {
     populateData()
@@ -68,8 +70,11 @@ export default function Dashboard() {
   }
 
   function purchase() {
+    if (!purchaseAllowed) return
+
     setBtnText("Processing...")
     setBalance((balance - cartValue).toFixed(3))
+    createPurchaseHistory()
     resetUnits()
     setTimeout(() => {
       setBtnText("Purchase Successful")
@@ -77,6 +82,21 @@ export default function Dashboard() {
         setBtnText("Purchase")
       }, 2000)
     }, 1000)
+  }
+
+  function createPurchaseHistory() {
+    let arr = []
+    items.forEach(item => {
+      if (selectedUnits[item.id] && selectedUnits[item.id] > 0) {
+        arr.push({
+          ...item,
+          date_time: new Date(),
+          units: selectedUnits[item.id],
+          total: selectedUnits[item.id] * item.metrics.market_data.price_usd,
+        })
+      }
+    })
+    setPurchaseHistory([...purchaseHistory, ...arr])
   }
 
   function resetUnits() {
@@ -121,33 +141,48 @@ export default function Dashboard() {
             {btnText}
           </button>
         </Toolbar>
-        <CardWrapper className='mt-4 text-right flex items-end flex-col'>
-          <div className='flex justify-center items-center mb-2'>
-            <label
-              htmlFor='auto-update'
-              className='flex justify-center items-center mr-4'
-            >
-              <input
-                type='checkbox'
-                id='auto-update'
-                value={shouldAutoUpdate}
-                onChange={handleAutoUpdateChange}
-                className='mr-2'
-              />
-              Auto Update
-            </label>
-            <button
-              onClick={populateData}
-              className='bg-slate-700 flex justify-center items-center px-2 rounded'
-            >
-              <img
-                src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
-                className={`${isLoading && "rotate-icon"} py-1`}
-              />
-            </button>
+        <div className='flex justify-between items-start border-t mt-4 pt-4 border-gray-700'>
+          <div className='w-2/3'>
+            <h2 className="text-center font-bold">Stocks</h2>
+            <CardWrapper className='mt-4 mr-2 text-right flex items-end flex-col'>
+              <div className='flex justify-center items-center mb-2'>
+                <label
+                  htmlFor='auto-update'
+                  className='flex justify-center items-center mr-4'
+                >
+                  <input
+                    type='checkbox'
+                    id='auto-update'
+                    value={shouldAutoUpdate}
+                    onChange={handleAutoUpdateChange}
+                    className='mr-2'
+                  />
+                  Auto Update
+                </label>
+                <button
+                  onClick={populateData}
+                  className='bg-slate-700 flex justify-center items-center px-2 rounded'
+                >
+                  <img
+                    src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
+                    className={`${isLoading && "rotate-icon"} py-1`}
+                  />
+                </button>
+              </div>
+              <Table items={getItems} handleUnitsInput={handleUnitsInput} />
+            </CardWrapper>
           </div>
-          <Table items={getItems} handleUnitsInput={handleUnitsInput} />
-        </CardWrapper>
+          <div className='w-1/3'>
+            <h2 className="text-center font-bold">Purchase History</h2>
+            <CardWrapper className='mt-4'>
+              {
+                purchaseHistory.length > 0 ?
+                <HistoryList items={purchaseHistory} /> :
+                <div className="text-sm text-center py-4">Purchase history will be displayed here</div>
+              }
+            </CardWrapper>
+          </div>
+        </div>
       </div>
     </div>
   )
