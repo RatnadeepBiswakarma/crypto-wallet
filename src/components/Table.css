@@ -1,0 +1,18 @@
+tr:nth-child(even) {
+  text-align: left;
+  background-color: #15203a;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+td.units {
+  width: 10rem;
+}
+
+td.units > input::placeholder {
+  color: #686868;
+  font-size: 0.9rem;
+}
