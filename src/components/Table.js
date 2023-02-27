@@ -12,7 +12,7 @@ export default function Table({ items, head, body, handleUnitsInput }) {
             <th className='px-2 pb-2'>Name</th>
             <th className='px-2 pb-2'>Symbol</th>
             <th className='px-2 pb-2'>Price</th>
-            <th className='px-2 pb-2'>Purchase Units</th>
+            <th className='px-2 pb-2'>Purchase</th>
           </tr>
         )}
       </thead>
@@ -34,7 +34,7 @@ export default function Table({ items, head, body, handleUnitsInput }) {
                       step='0.01'
                       value={item.units}
                       onChange={evt => handleUnitsInput(item, evt.target.value)}
-                      placeholder='Units to purchase'
+                      placeholder='Units'
                       className='bg-transparent w-full px-2 border-b border-gray-700'
                     />
                   </td>
