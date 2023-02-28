@@ -60,6 +60,14 @@ export default function Dashboard() {
     })
   })
 
+  const getProfit = useMemo(() => {
+    let profit = 0
+    getHistory.forEach(item => {
+      profit += item.current_price - item.metrics.market_data.price_usd
+    })
+    return profit.toFixed(3)
+  })
+
   function populateData() {
     setIsLoading(true)
     fetchData()
@@ -139,6 +147,16 @@ export default function Dashboard() {
           <div className='flex'>
             <div className='font-medium text-lg mr-4'>
               Balance: <span className='text-green-500'>${balance}</span>
+            </div>
+            <div className='font-medium text-lg mr-4'>
+              Profit/Loss:{" "}
+              <span
+                className={`${
+                  getProfit > 0 ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                ${getProfit}
+              </span>
             </div>
           </div>
         </Toolbar>
