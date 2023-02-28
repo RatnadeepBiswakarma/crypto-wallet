@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1e31218a-e44e-4285-820c-8282ee222035",
+    "slug": "bitcoin",
+    "symbol": "BTC",
+    "metrics": {
+      "market_data": {
+        "price_usd": 23461.360750679363
+      }
+    },
+    "date_time": "",
+    "units": "0.3",
+    "total": 7038.408225203809
+  },
+  {
+    "id": "21c795f5-1bfd-40c3-858e-e9d7e820c6d0",
+    "slug": "ethereum",
+    "symbol": "ETH",
+    "metrics": {
+      "market_data": {
+        "price_usd": 1632.2690959790057
+      }
+    },
+    "date_time": "",
+    "units": "20",
+    "total": 32645.38191958011
+  },
+  {
+    "id": "51f8ea5e-f426-4f40-939a-db7e05495374",
+    "slug": "tether",
+    "symbol": "USDT",
+    "metrics": {
+      "market_data": {
+        "price_usd": 0.9999063066028533
+      }
+    },
+    "date_time": "",
+    "units": "500",
+    "total": 499.95315330142665
+  },
+  {
+    "id": "7dc551ba-cfed-4437-a027-386044415e3e",
+    "slug": "binance-coin",
+    "symbol": "BNB",
+    "metrics": {
+      "market_data": {
+        "price_usd": 304.97551797664903
+      }
+    },
+    "date_time": "",
+    "units": "35",
+    "total": 10674.143129182716
+  },
+  {
+    "id": "5da7bde4-61e9-4a6f-9fc3-7ed66effb198",
+    "slug": "binance-usd",
+    "symbol": "BUSD",
+    "metrics": {
+      "market_data": {
+        "price_usd": 1.0000000156848294
+      }
+    },
+    "date_time": "",
+    "units": "1000",
+    "total": 1000.0000156848295
+  },
+  {
+    "id": "7d793fa7-5fc6-432a-b26b-d1b10769d42e",
+    "slug": "dogecoin",
+    "symbol": "DOGE",
+    "metrics": {
+      "market_data": {
+        "price_usd": 0.08196348956642506
+      }
+    },
+    "date_time": "",
+    "units": "840",
+    "total": 68.84933123579705
+  },
+  {
+    "id": "4b474270-99ba-4a18-869d-11cd3fc0201a",
+    "slug": "polygon",
+    "symbol": "MATIC",
+    "metrics": {
+      "market_data": {
+        "price_usd": 1.2301949122247058
+      }
+    },
+    "date_time": "",
+    "units": "30",
+    "total": 36.90584736674117
+  },
+  {
+    "id": "dd9e95b8-5605-4f02-a885-28ddcb40979e",
+    "slug": "staked-ether",
+    "symbol": "STETH",
+    "metrics": {
+      "market_data": {
+        "price_usd": 1638.3263599984914
+      }
+    },
+    "date_time": "",
+    "units": "20",
+    "total": 32766.527199969827
+  },
+  {
+    "id": "2db6b38a-681a-4514-9d67-691e319597ee",
+    "slug": "avalanche",
+    "symbol": "AVAX",
+    "metrics": {
+      "market_data": {
+        "price_usd": 17.786839088176936
+      }
+    },
+    "date_time": "",
+    "units": "15",
+    "total": 266.80258632265407
+  },
+  {
+    "id": "a3b64831-4288-48bd-a3e7-eb4f77f6f740",
+    "slug": "dai",
+    "symbol": "DAI",
+    "metrics": {
+      "market_data": {
+        "price_usd": 0.9996166172637133
+      }
+    },
+    "date_time": "",
+    "units": "200",
+    "total": 199.92332345274266
+  },
+  {
+    "id": "1d51479d-68f6-4886-8644-2a55ea9007bf",
+    "slug": "uniswap",
+    "symbol": "UNI",
+    "metrics": {
+      "market_data": {
+        "price_usd": 6.466963855909104
+      }
+    },
+    "date_time": "",
+    "units": "600",
+    "total": 3880.1783135454625
+  },
+  {
+    "id": "81bbf507-29d5-4458-8d42-b81d7c197996",
+    "slug": "wrapped-bitcoin",
+    "symbol": "WBTC",
+    "metrics": {
+      "market_data": {
+        "price_usd": 23455.49768654348
+      }
+    },
+    "date_time": "",
+    "units": "1",
+    "total": 23455.49768654348
+  }
+]

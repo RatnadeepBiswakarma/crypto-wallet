@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react"
 import { fetchData } from "apis"
+import dummyHistory from "data/dummy-history.json"
 import Toolbar from "components/Toolbar"
 import Table from "./Table"
 import CardWrapper from "containers/CardWrapper"
@@ -13,7 +14,9 @@ export default function Dashboard() {
   const [selectedUnits, setSelectedUnits] = useState({})
   const [shouldAutoUpdate, setShouldAutoUpdate] = useState(false)
   const [timerId, setTimerId] = useState(null)
-  const [purchaseHistory, setPurchaseHistory] = useState([])
+  const [purchaseHistory, setPurchaseHistory] = useState(
+    dummyHistory.map(item => ({ ...item, date_time: new Date() }))
+  )
 
   useEffect(() => {
     populateData()
