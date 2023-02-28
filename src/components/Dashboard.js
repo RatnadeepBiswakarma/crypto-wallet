@@ -61,7 +61,7 @@ export default function Dashboard() {
         current_price: dataSource.metrics.market_data.price_usd,
       }
     })
-  })
+  }, [purchaseHistory, items])
 
   const getProfit = useMemo(() => {
     let profit = 0
@@ -69,7 +69,7 @@ export default function Dashboard() {
       profit += item.current_price - item.metrics.market_data.price_usd
     })
     return profit.toFixed(3)
-  })
+  }, [getHistory])
 
   function populateData() {
     setIsLoading(true)
