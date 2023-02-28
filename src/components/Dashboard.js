@@ -7,13 +7,13 @@ import CardWrapper from "containers/CardWrapper"
 import HistoryList from "./History/HistoryList"
 
 export default function Dashboard() {
+  let timerId = null
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [balance, setBalance] = useState(500000)
   const [btnText, setBtnText] = useState("Purchase")
   const [selectedUnits, setSelectedUnits] = useState({})
   const [shouldAutoUpdate, setShouldAutoUpdate] = useState(false)
-  const [timerId, setTimerId] = useState(null)
   const [purchaseHistory, setPurchaseHistory] = useState(
     dummyHistory.map(item => ({ ...item, date_time: new Date() }))
   )
@@ -28,6 +28,7 @@ export default function Dashboard() {
     } else {
       clearTimeout(timerId)
     }
+    return () => clearTimeout(timerId)
   }, [shouldAutoUpdate])
 
   const cartValue = useMemo(() => {
@@ -135,10 +136,9 @@ export default function Dashboard() {
 
     if (shouldAutoUpdate) {
       populateData()
-      const id = setTimeout(() => {
+      timerId = setTimeout(() => {
         autoUpdateData()
-      }, 3000)
-      setTimerId(id)
+      }, 2000)
     }
   }
 
