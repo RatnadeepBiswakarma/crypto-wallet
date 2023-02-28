@@ -188,6 +188,7 @@ export default function Dashboard() {
                   >
                     <img
                       src='https://icongr.am/fontawesome/refresh.svg?size=20&color=cfcfcf'
+                      alt='reload icon'
                       className={`${isLoading && "rotate-icon"} py-1`}
                     />
                   </button>
