@@ -152,7 +152,7 @@ export default function Dashboard() {
               Balance: <span className='text-green-500'>${balance}</span>
             </div>
             <div className='font-medium text-lg mr-4'>
-              Profit/Loss:{" "}
+              Profit/Loss:
               <span
                 className={`${
                   getProfit > 0 ? "text-green-500" : "text-red-500"
